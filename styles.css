@@ -676,6 +676,7 @@ button:focus-visible {
 }
 
 .block p { font-size: 15.5px; }
+.block p + p { margin-top: 10px; }
 
 .project .btns { margin-top: 28px; }
 
