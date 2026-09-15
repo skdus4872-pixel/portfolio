@@ -355,6 +355,20 @@ button:focus-visible {
   border-radius: var(--r-md);
 }
 
+/* 프로필 사진: 자리 표시자와 같은 비율 유지, 넘치는 부분은 잘라냄 */
+.ph-img--profile {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* 홈페이지 화면: 16:10으로 채우고 넘치는 좌우는 잘라냄 */
+.ph-img--web {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center top;
+}
+
 /* ---------- 공통 제목 ---------- */
 
 .section__title {
@@ -531,7 +545,7 @@ button:focus-visible {
 
 .project {
   display: grid;
-  grid-template-columns: 48% 52%;
+  grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
   gap: 44px;
   align-items: center;
   position: relative;
@@ -637,7 +651,7 @@ button:focus-visible {
 }
 
 .meta dt {
-  min-width: 74px;
+  min-width: 54px;
   color: var(--ink-soft);
   font-size: 13px;
   letter-spacing: .04em;
@@ -856,7 +870,8 @@ button:focus-visible {
     gap: 40px;
   }
 
-  .about__top .ph--profile {
+  .about__top .ph--profile,
+  .about__top .ph-img--profile {
     max-width: 320px;
     aspect-ratio: 4 / 4.4;
   }
