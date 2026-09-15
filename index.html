@@ -52,7 +52,47 @@
         </div>
       </div>
       <div class="hero__visual">
-        <div class="ph ph--hero">대표 작업 이미지<br>자리</div>
+        <!-- 대표 모션: 빈 유리 → 점 → 선 → 도형·타이포 조립 → IDEA → VISUAL → 3D 유리 오브젝트 → 회전 → 반복 (8초 루프) -->
+        <div class="motion" aria-hidden="true">
+          <div class="motion__blob motion__blob--a"></div>
+          <div class="motion__blob motion__blob--b"></div>
+          <div class="motion__blob motion__blob--c"></div>
+
+          <div class="m-shapes">
+            <svg class="m-svg" viewBox="0 0 400 300" fill="none" stroke-linecap="round">
+              <g class="m-lines" stroke="currentColor" stroke-width="1.6">
+                <line x1="200" y1="150" x2="112" y2="92"  pathLength="1"/>
+                <line x1="200" y1="150" x2="296" y2="84"  pathLength="1"/>
+                <line x1="200" y1="150" x2="98"  y2="214" pathLength="1"/>
+                <line x1="200" y1="150" x2="306" y2="222" pathLength="1"/>
+              </g>
+              <circle class="m-ring" cx="200" cy="150" r="66" stroke="currentColor" stroke-width="1.8" pathLength="1"/>
+              <path class="m-curve" d="M36 252 C 118 150, 282 176, 364 58" stroke="currentColor" stroke-width="1.6" pathLength="1"/>
+              <g class="m-type" fill="currentColor" font-family="inherit" font-weight="600">
+                <text class="m-type__a" x="74"  y="78"  font-size="20">Aa</text>
+                <text class="m-type__b" x="322" y="118" font-size="17">01</text>
+                <text class="m-type__c" x="318" y="256" font-size="22">&amp;</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="m-dot"></div>
+
+          <p class="m-word m-word--idea">IDEA</p>
+          <p class="m-word m-word--visual">VISUAL</p>
+
+          <div class="m-orb">
+            <div class="m-orb__spin">
+              <div class="m-orb__core"></div>
+              <div class="m-orb__ring m-orb__ring--1"></div>
+              <div class="m-orb__ring m-orb__ring--2"></div>
+              <div class="m-orb__ring m-orb__ring--3"></div>
+            </div>
+            <div class="m-orb__glow"></div>
+          </div>
+
+          <div class="motion__sheen"></div>
+        </div>
       </div>
     </div>
   </section>
