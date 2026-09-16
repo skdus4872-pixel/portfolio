@@ -211,9 +211,13 @@ button:focus-visible {
 .hero__inner {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: center;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.hero__text {
+  max-width: 760px;
+  text-align: center;
 }
 
 .eyebrow {
@@ -242,7 +246,6 @@ button:focus-visible {
   letter-spacing: .02em;
 }
 
-.hero__visual { min-width: 0; }
 
 /* ---------- 버튼 ---------- */
 
@@ -341,7 +344,6 @@ button:focus-visible {
   line-height: 1.6;
 }
 
-.ph--hero    { aspect-ratio: 4 / 3;  border-radius: var(--r-lg); }
 .ph--profile { aspect-ratio: 4 / 5;  }
 .ph--web     { aspect-ratio: 16 / 10; }  /* 홈페이지 화면 */
 .ph--doc     { aspect-ratio: 4 / 3;  }   /* 포트폴리오 문서 */
@@ -874,7 +876,6 @@ button:focus-visible {
 @media (max-width: 1000px) {
   :root { --section-y: 88px; }
 
-  .hero__inner,
   .about__top {
     grid-template-columns: 1fr;
     gap: 40px;
