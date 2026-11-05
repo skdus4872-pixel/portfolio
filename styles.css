@@ -568,6 +568,18 @@ button:focus-visible {
   color: var(--ink-soft);
 }
 
+/* 항목 설명 오른쪽에 작은 버튼을 나란히 둘 때 */
+.info-list dd .info-list__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn--sm {
+  padding: 4px 14px;
+  font-size: 12.5px;
+}
+
 /* 사용 도구 목록 */
 .tool-list {
   display: grid;
