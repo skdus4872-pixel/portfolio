@@ -581,6 +581,7 @@ button:focus-visible {
 }
 
 .btn--gray {
+  margin-left: 75px;
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
