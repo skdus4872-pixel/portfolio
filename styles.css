@@ -650,6 +650,11 @@ button:focus-visible {
   border-bottom: 1px solid var(--line);
 }
 
+.projects__empty {
+  margin-top: 44px;
+  text-align: center;
+}
+
 .projects__range {
   color: var(--ink-soft);
   font-size: 14px;
