@@ -402,6 +402,59 @@ button:focus-visible {
   color: var(--ink-soft);
 }
 
+/* ---------- 이미지 넘겨보기 ---------- */
+
+.slider {
+  max-width: 440px;
+  margin-inline: auto;
+}
+
+.slider__track {
+  display: flex;
+  align-items: flex-start;   /* 페이지 비율이 조금 달라도 늘어나지 않게 */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--r-md);
+}
+.slider__track::-webkit-scrollbar { display: none; }
+
+.slider__track > img {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.slider__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.slider__btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  justify-content: center;
+}
+
+.slider__btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.slider__btn:disabled:hover { transform: none; }
+
+.slider__count {
+  min-width: 56px;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: .08em;
+  color: var(--ink-soft);
+}
+
 /* ---------- 이미지 자리 표시자 ---------- */
 
 .ph {
@@ -648,11 +701,6 @@ button:focus-visible {
   flex-wrap: wrap;
   padding-bottom: 22px;
   border-bottom: 1px solid var(--line);
-}
-
-.projects__empty {
-  margin-top: 44px;
-  text-align: center;
 }
 
 .projects__range {
