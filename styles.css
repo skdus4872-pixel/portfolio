@@ -294,6 +294,24 @@ button:focus-visible {
   line-height: 1.28;
 }
 
+/* 첫 화면 제목 물결 모션 — 글자마다 시차를 두고 위아래로 움직인다 */
+.wave__word { display: inline-block; }
+
+.wave__char {
+  display: inline-block;
+  animation: wave 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 90ms);
+}
+
+@keyframes wave {
+  0%, 50%, 100% { transform: translateY(0); }
+  25%           { transform: translateY(-.2em); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave__char { animation: none; }
+}
+
 .hero__name {
   margin-top: 28px;
   font-size: 17px;

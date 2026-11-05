@@ -297,6 +297,40 @@
 
 <script src="nav.js"></script>
 <script>
+  /* 첫 화면 제목 물결 모션: 글자를 하나씩 나눠 시차를 준다 (움직임은 styles.css의 .wave__char) */
+  (function () {
+    var title = document.querySelector('.hero__title');
+    var index = 0;
+
+    /* 줄바꿈(br) 자리는 띄어 읽도록 공백으로 바꿔 스크린리더용 이름을 만든다 */
+    title.setAttribute('aria-label', title.innerHTML.replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim());
+
+    Array.prototype.slice.call(title.childNodes).forEach(function (node) {
+      if (node.nodeType !== Node.TEXT_NODE) return;
+
+      var frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(' '));
+          return;
+        }
+        var word = document.createElement('span');
+        word.className = 'wave__word';
+        word.setAttribute('aria-hidden', 'true');
+        Array.from(part).forEach(function (ch) {
+          var span = document.createElement('span');
+          span.className = 'wave__char';
+          span.style.setProperty('--i', index++);
+          span.textContent = ch;
+          word.appendChild(span);
+        });
+        frag.appendChild(word);
+      });
+      title.replaceChild(frag, node);
+    });
+  })();
+
   (function () {
     var btn = document.querySelector('.totop');
     function toggle() {
