@@ -987,6 +987,7 @@ button:focus-visible {
   .about__top .ph--profile,
   .about__top .ph-img--profile {
     max-width: 320px;
+    justify-self: center;
     aspect-ratio: 4 / 4.4;
   }
 
