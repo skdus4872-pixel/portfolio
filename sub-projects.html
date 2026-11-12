@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SUB PROJECTS — 디자인 포트폴리오</title>
 <meta name="description" content="김나연 디자인 포트폴리오 서브 프로젝트">
+<!-- 링크 공유 미리보기 (카카오톡 · 메신저 · SNS) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://portfolio-rouge-nine-88.vercel.app/sub-projects.html">
+<meta property="og:title" content="SUB PROJECTS — 김나연 디자인 포트폴리오">
+<meta property="og:description" content="김나연 디자인 포트폴리오 서브 프로젝트">
+<meta property="og:image" content="https://portfolio-rouge-nine-88.vercel.app/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="디자인으로 생각을 전달합니다 — 김나연 Visual Designer">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -80,7 +90,18 @@
       <!-- 서브 프로젝트 02 -->
       <article class="project">
         <div class="project__media">
-          <div class="ph ph--web">블로그형 홈페이지 이미지 자리</div>
+          <div class="slider slider--wide" data-slider role="group" aria-label="블로그형 홈페이지 작업물 넘겨보기">
+            <div class="slider__track">
+              <img class="ph-img" src="images/blog-byeol-homecare.jpg" width="1474" height="678" loading="lazy" alt="별빛홈케어 홈페이지형 블로그 메인 디자인">
+              <img class="ph-img" src="images/blog-byd.jpg" width="1600" height="865" loading="lazy" alt="BYD 황팀장 홈페이지형 블로그 메인 디자인">
+              <img class="ph-img" src="images/blog-baro-dobae.jpg" width="1600" height="794" loading="lazy" alt="바로도배 홈페이지형 블로그 메인 디자인">
+            </div>
+            <div class="slider__nav">
+              <button class="btn btn--line slider__btn" type="button" data-slider-prev aria-label="이전 작업물"><span aria-hidden="true">←</span></button>
+              <p class="slider__count" data-slider-count aria-live="polite">1 / 3</p>
+              <button class="btn btn--line slider__btn" type="button" data-slider-next aria-label="다음 작업물"><span aria-hidden="true">→</span></button>
+            </div>
+          </div>
         </div>
         <div class="project__body">
           <p class="project__num">02</p>

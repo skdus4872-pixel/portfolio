@@ -409,6 +409,9 @@ button:focus-visible {
   margin-inline: auto;
 }
 
+/* 가로형 홈페이지 화면: 칸 너비를 모두 사용 */
+.slider--wide { max-width: none; }
+
 .slider__track {
   display: flex;
   align-items: flex-start;   /* 페이지 비율이 조금 달라도 늘어나지 않게 */
