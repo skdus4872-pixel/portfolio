@@ -105,6 +105,7 @@ button:focus-visible {
   .section__title:hover,
   .project__title:hover,
   .contact__title:hover,
+  .card--info:hover,
   .totop:hover { transform: none; }
 }
 
@@ -560,6 +561,13 @@ button:focus-visible {
   border: 1px solid var(--glass-line);
   border-radius: var(--r-md);
   box-shadow: var(--glass-shadow);
+  transition: transform var(--hover-speed), box-shadow var(--hover-speed);
+}
+
+/* 커서를 올리면 카드가 살짝 위로 떠오른다 */
+.card--info:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--glass-shadow), 0 14px 28px rgba(120, 124, 134, .14);
 }
 
 /* ABOUT 카드도 유리 안쪽에 파스텔을 깐다 */
