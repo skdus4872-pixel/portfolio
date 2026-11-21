@@ -74,7 +74,7 @@
   <section class="about section" id="about">
     <div class="wrap">
       <div class="about__top">
-        <img class="ph-img ph-img--profile" src="images/profile.jpg" alt="디자이너 김나연 프로필 사진">
+        <img class="ph-img ph-img--profile" src="images/profile.png" alt="디자이너 김나연 프로필 사진">
         <div class="about__text">
           <h2 class="section__title">ABOUT ME</h2>
           <p class="section__lead">나의 디자인 관점과 일하는 방식</p>
@@ -385,6 +385,37 @@
     }
     toggle();
     window.addEventListener('scroll', toggle, { passive: true });
+  })();
+
+  /* ABOUT ME · MAIN PROJECTS 스크롤 등장 모션: 화면에 들어오면 아래에서 위로 떠오른다 (움직임은 styles.css의 .reveal)
+     나란히 놓인 요소끼리는 0.12초씩 차례로 올라온다 */
+  (function () {
+    var groups = [
+      document.querySelectorAll('.about__top > *'),
+      document.querySelectorAll('.about__grid > .card--info'),
+      document.querySelectorAll('.projects__head')
+    ];
+    document.querySelectorAll('.projects .project').forEach(function (p) {
+      groups.push(p.querySelectorAll('.project__media, .project__body'));
+    });
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    groups.forEach(function (items) {
+      items.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--reveal-delay', i * 0.12 + 's');
+        io.observe(el);
+      });
+    });
   })();
 
   /* 이력서 보기 창 */
