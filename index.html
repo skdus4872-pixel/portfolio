@@ -16,6 +16,7 @@
 <meta property="og:image:alt" content="디자인으로 생각을 전달합니다 — 김나연 Visual Designer">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
 </head>
 <body>
 
@@ -48,6 +49,11 @@
       </li>
       <li><a href="#contact">CONTACT ME</a></li>
     </ul>
+    <!-- 다크 모드 켜기/끄기 (동작은 theme.js) -->
+    <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="다크 모드로 전환">
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7"/></svg>
+    </button>
   </nav>
 </header>
 
@@ -324,6 +330,10 @@
   <div class="resume__backdrop" data-resume-close></div>
   <div class="resume__panel">
     <div class="resume__tools">
+      <!-- 휴대폰에서만 보이는 확대 버튼 (이력서를 탭해도 확대/축소됩니다) -->
+      <button class="resume__zoom" type="button" data-resume-zoom aria-pressed="false">
+        <span data-resume-zoom-label>크게 보기</span>
+      </button>
       <a class="resume__save" href="images/resume.png" download="김나연_이력서.png">
         <span aria-hidden="true">↓</span> 이미지 저장
       </a>
@@ -421,7 +431,42 @@
   /* 이력서 보기 창 */
   (function () {
     var box = document.getElementById('resume');
+    var scroller = box.querySelector('.resume__scroll');
+    var img = box.querySelector('.resume__img');
+    var zoomBtn = box.querySelector('[data-resume-zoom]');
+    var zoomLabel = box.querySelector('[data-resume-zoom-label]');
+    var isPhone = window.matchMedia('(max-width: 640px)');
     var opener = null;
+
+    /* 확대/축소 — (x, y)는 확대 후 화면 가운데에 올 위치 (이미지 기준 0~1 비율) */
+    function setZoom(on, x, y) {
+      box.classList.toggle('is-zoomed', on);
+      zoomBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      zoomLabel.textContent = on ? '화면에 맞추기' : '크게 보기';
+      if (on) {
+        scroller.scrollLeft = img.offsetWidth * (x == null ? 0 : x) - scroller.clientWidth / 2;
+        scroller.scrollTop = img.offsetHeight * (y == null ? 0 : y) - scroller.clientHeight / 2;
+      } else {
+        scroller.scrollLeft = 0;
+      }
+    }
+
+    zoomBtn.addEventListener('click', function () {
+      var on = !box.classList.contains('is-zoomed');
+      /* 버튼으로 확대하면 지금 보던 위쪽 왼편부터 */
+      setZoom(on, 0, on ? (scroller.scrollTop / img.offsetHeight) : null);
+    });
+
+    /* 휴대폰에서 이력서를 탭하면 그 위치를 중심으로 확대, 다시 탭하면 원래대로 */
+    img.addEventListener('click', function (e) {
+      if (!isPhone.matches) return;
+      if (box.classList.contains('is-zoomed')) {
+        setZoom(false);
+        return;
+      }
+      var r = img.getBoundingClientRect();
+      setZoom(true, (e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
+    });
 
     function open(e) {
       opener = e.currentTarget;
@@ -431,6 +476,8 @@
     }
 
     function close() {
+      setZoom(false);
+      scroller.scrollTop = 0;
       box.hidden = true;
       document.body.style.overflow = '';
       if (opener) opener.focus();

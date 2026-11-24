@@ -249,6 +249,42 @@ button:focus-visible {
   transform: none;
 }
 
+/* 다크 모드 켜기/끄기 버튼 — 메뉴 오른쪽, 얇은 구분선 뒤 */
+.theme-toggle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, .16);
+  box-shadow: -11px 0 0 -10px rgba(255, 255, 255, .55);  /* 구분선 */
+  color: rgba(255, 255, 255, .92);
+  cursor: pointer;
+  transition: background var(--hover-speed), transform var(--hover-speed);
+}
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, .28);
+  transform: rotate(-14deg) scale(1.1);
+}
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* 라이트일 때는 달(다크로 전환), 다크일 때는 해(라이트로 전환) */
+.theme-toggle__sun { display: none; }
+[data-theme="dark"] .theme-toggle__sun  { display: block; }
+[data-theme="dark"] .theme-toggle__moon { display: none; }
+
 /* ---------- 첫 화면 ---------- */
 
 .hero {
@@ -998,6 +1034,28 @@ button:focus-visible {
   transform: translateY(-2px) scale(1.04);
 }
 
+/* 이력서 확대 버튼 — 컴퓨터에서는 숨기고 휴대폰에서만 보인다 (반응형 참고) */
+.resume__zoom {
+  display: none;
+  align-items: center;
+  height: 36px;
+  margin-right: auto;   /* 왼쪽 끝에 두고 저장·닫기는 오른쪽 */
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: linear-gradient(155deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .6));
+  border: 1px solid var(--glass-line);
+  border-radius: var(--r-full);
+  box-shadow: 0 10px 20px -12px rgba(38, 38, 44, .4);
+  cursor: pointer;
+}
+.resume__zoom[aria-pressed="true"] {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
 .resume__close {
   width: 40px;
   height: 40px;
@@ -1064,6 +1122,117 @@ button:focus-visible {
 }
 
 /* ============================================================
+   다크 모드
+   헤더의 버튼(theme.js)이 <html data-theme="dark"> 를 붙이면 적용됩니다.
+   색은 아래 변수에서 한 번에 조정하세요.
+   ============================================================ */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:         #16171A;
+  --bg-soft:    #1B1C20;
+
+  --mint:       rgba(96, 160, 148, .30);
+  --mint-soft:  rgba(96, 160, 148, .20);
+  --pink:       rgba(188, 120, 132, .26);
+  --pink-soft:  rgba(188, 120, 132, .17);
+  --sky:        rgba(110, 146, 180, .24);
+  --sage:       #6F8A85;
+  --sage-deep:  #86A9A2;
+  --ink:        #ECECEF;
+  --ink-soft:   #A1A1A8;
+  --line:       #34353B;
+  --accent:     #B9B9C0;
+  --accent-deep:#F2F2F5;
+  --accent-pale:#1D1F22;
+
+  --header-bg:  rgba(70, 71, 78, .62);
+  --glass-line: rgba(255, 255, 255, .12);
+  --glass-face: linear-gradient(
+                  152deg,
+                  rgba(52, 54, 60, .78) 0%,
+                  rgba(36, 37, 42, .52) 48%,
+                  rgba(46, 48, 54, .70) 100%);
+  --glass-shadow:
+    0 26px 50px -22px rgba(0, 0, 0, .6),
+    0 3px 10px rgba(0, 0, 0, .2),
+    inset 0 1px 0 rgba(255, 255, 255, .10),
+    inset 0 -18px 34px -22px rgba(255, 255, 255, .05);
+}
+
+/* 테마를 바꿀 때 배경과 글자색이 부드럽게 바뀌도록 */
+body { transition: background-color .3s, color .3s; }
+
+[data-theme="dark"] .header__bar {
+  border-color: rgba(255, 255, 255, .14);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02) 60%),
+    var(--header-bg);
+}
+
+[data-theme="dark"] .submenu { background: #2A2B30; }
+
+[data-theme="dark"] .btn--solid { color: #fff; }
+
+[data-theme="dark"] .btn--line,
+[data-theme="dark"] .btn--pending,
+[data-theme="dark"] .resume__close,
+[data-theme="dark"] .resume__zoom,
+[data-theme="dark"] .totop {
+  background: linear-gradient(155deg, rgba(70, 72, 80, .9), rgba(44, 46, 52, .7));
+  border-color: rgba(255, 255, 255, .14);
+  box-shadow:
+    0 10px 20px -14px rgba(0, 0, 0, .6),
+    inset 0 1px 0 rgba(255, 255, 255, .10);
+}
+
+[data-theme="dark"] .ph {
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02) 62%),
+    radial-gradient(78% 80% at 26% 20%, var(--mint-soft), transparent 76%),
+    rgba(60, 62, 68, .6);
+  border-color: rgba(255, 255, 255, .1);
+  box-shadow: none;
+  color: var(--ink-soft);
+}
+
+[data-theme="dark"] .card__sub {
+  border-top-color: rgba(255, 255, 255, .1);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .info-list dd .info-list__tag { background: rgba(255, 255, 255, .06); }
+
+[data-theme="dark"] .btn--gray {
+  background: #4A4B52;
+  border-color: #4A4B52;
+}
+[data-theme="dark"] .btn--gray:hover {
+  background: #5C5D65;
+  border-color: #5C5D65;
+}
+
+[data-theme="dark"] .meta {
+  background: linear-gradient(150deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02));
+  border-color: rgba(255, 255, 255, .1);
+  box-shadow:
+    0 8px 18px -12px rgba(0, 0, 0, .5),
+    inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+/* 흰 배경 사진이 너무 튀지 않게 살짝 낮춘다 */
+[data-theme="dark"] .ph-img { filter: brightness(.94); }
+
+[data-theme="dark"] .resume__backdrop { background: rgba(0, 0, 0, .6); }
+
+[data-theme="dark"] .resume__zoom[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ============================================================
    반응형
    ============================================================ */
 
@@ -1107,6 +1276,14 @@ button:focus-visible {
   .header__menu { gap: 6px 18px; }
   .header__menu a { font-size: 12.5px; }
 
+  /* 다크 모드 버튼이 들어가도 메뉴가 한 줄에 들어가도록 간격을 줄인다 */
+  .header__bar:has(.theme-toggle) { padding-inline: 16px 8px; }
+  .header__bar:has(.theme-toggle) .header__menu { gap: 6px 14px; flex-wrap: nowrap; }
+  .header__bar:has(.theme-toggle) .header__menu a { letter-spacing: .06em; }
+  .header__bar:has(.theme-toggle) .header__menu a { white-space: nowrap; }
+  .theme-toggle { width: 28px; height: 28px; margin-left: 12px; }
+  .theme-toggle svg { width: 15px; height: 15px; }
+
   html { scroll-padding-top: 96px; }
 
   .hero { padding-block: 40px 72px; }
@@ -1134,4 +1311,23 @@ button:focus-visible {
   .resume__tools { gap: 6px; padding-bottom: 10px; }
   .resume__save { height: 36px; padding: 0 14px; font-size: 13px; }
   .resume__close { width: 36px; height: 36px; }
+
+  /* 이력서 확대 — 버튼을 누르거나 이미지를 탭하면 원본 크기(794px)로 */
+  .resume__zoom { display: inline-flex; }
+  .resume__img { cursor: zoom-in; }
+  .resume.is-zoomed .resume__panel { width: 100%; height: 100%; }
+  .resume.is-zoomed .resume__img {
+    width: auto;
+    max-width: none;
+    cursor: zoom-out;
+  }
+}
+
+/* 아주 좁은 휴대폰 (320~360px) — 메뉴 글자를 조금 더 줄여 한 줄 유지 */
+@media (max-width: 360px) {
+  .header { padding-inline: 10px; }
+  .header__bar:has(.theme-toggle) { padding-inline: 14px 6px; }
+  .header__bar:has(.theme-toggle) .header__menu { gap: 6px 10px; }
+  .header__bar:has(.theme-toggle) .header__menu a { font-size: 11px; letter-spacing: .03em; }
+  .theme-toggle { margin-left: 8px; }
 }
